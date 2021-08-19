@@ -1,0 +1,13 @@
+application:
+  name: simple-example-node
+  organization: QoveryCommunity
+  project: BuildpacksTest2
+  publicly_accessible: true
+  ram: 256MB
+  port: 3000
+routers:
+- name: main
+  routes:
+  - application_name: simple-example-node
+    paths:
+    - /
