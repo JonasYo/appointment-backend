@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start:dev": "nodemon --config nodemon.json src/app.ts",
+    "start:dev": "nodemon --config nodemon.json src/index.ts",
+    "start": "node src/index.ts",
     "seed": "node src/seeds/index.ts"
   },
   "dependencies": {
