@@ -1,11 +1,13 @@
 {
   "name": "appointment-api",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
+    "start": "yarn run build && node dist/index.js",
     "start:dev": "nodemon --config nodemon.json src/index.ts",
-    "start": "node src/index.ts",
+    "build": "rimraf ./dist && tsc",
+    "serve": "node dist/index.ts",
     "seed": "node src/seeds/index.ts"
   },
   "dependencies": {
@@ -22,6 +24,7 @@
     "nodemon": "^2.0.9",
     "pino": "^6.11.3",
     "pino-pretty": "^4.7.1",
+    "rimraf": "^3.0.2",
     "yup": "^0.32.9"
   },
   "devDependencies": {
