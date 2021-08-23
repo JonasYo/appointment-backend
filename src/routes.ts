@@ -18,24 +18,15 @@ import {
 } from "./schema/user";
 
 export default function (app: Express) {
-    app.post('/ping', (req: Request, res: Response) => res.status(204).send({}));
+  app.get('/ping', (req: Request, res: Response) => res.status(204).send({}));
 
-  // Register user
-    app.post("/api/signup", validateRequest(createUserSchema), createUserHandler);
+  app.post("/api/signup", validateRequest(createUserSchema), createUserHandler);
 
-  // Login
-  app.post(
-    "/api/login",
-    validateRequest(createUserSessionSchema),
-    createUserSessionHandler
-  );
+  app.post("/api/login", validateRequest(createUserSessionSchema), createUserSessionHandler);
 
-  // Get the user's sessions
   app.get("/api/sessions", requiresUser, getUserSessionsHandler);
 
-  // Logout
   app.delete("/api/sessions", requiresUser, invalidateUserSessionHandler);
 
-  // Get all services
   app.get("/api/services", getAllServices);
 }
