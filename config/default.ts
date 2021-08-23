@@ -1,6 +1,6 @@
 export default {
   port: process.env.PORT,
-  host: "localhost",
+  host: "0.0.0.0",
   dbUri: "mongodb+srv://jonas:metalica@rest-api.lhoap.mongodb.net/scheduling?retryWrites=true&w=majority",
   saltWorkFactor: 10,
   accessTokenTtl: "15m",
