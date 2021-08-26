@@ -1,13 +1,13 @@
 import jwt from "jsonwebtoken";
-import config from "config";
+import * as config from "../config";
 
-const privateKey = config.get("privateKey") as string;
+const { privateKey } = config.getEnvConfig();
 
-export function sign(object: Object, options?: jwt.SignOptions | undefined) {
+export const sign = (object: Object, options?: jwt.SignOptions | undefined) => {
   return jwt.sign(object, privateKey, options);
 }
 
-export function decode(token: string) {
+export const decode = (token: string) => {
   try {
     const decoded = jwt.verify(token, privateKey);
 

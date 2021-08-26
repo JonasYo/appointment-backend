@@ -1,10 +1,9 @@
 var seeder = require('mongoose-seed');
-var config = require('config');
 
-const dbUri = config.get("dbUri");
-console.log(dbUri);
+import * as config from "../config";
+const { databaseUri } = config.getEnvConfig();
 
-seeder.connect(dbUri, function () {
+seeder.connect(databaseUri, function () {
     seeder.loadModels([
         'src/model/schedules.ts',
         'src/model/services.ts',

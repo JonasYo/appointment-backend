@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import config from "config";
+
+import * as config from "../config";
+const { saltWorkFactor } = config.getEnvConfig();
 
 export interface UserDocument extends mongoose.Document {
   email: string;
@@ -27,7 +29,7 @@ UserSchema.pre("save", async function (next: mongoose.HookNextFunction) {
   if (!user.isModified("password")) return next();
 
   // Random additional data
-  const salt = await bcrypt.genSalt(config.get("saltWorkFactor"));
+    const salt = await bcrypt.genSalt(saltWorkFactor);
 
   const hash = await bcrypt.hashSync(user.password, salt);
 

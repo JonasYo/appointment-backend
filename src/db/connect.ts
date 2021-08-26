@@ -1,12 +1,11 @@
 import mongoose from "mongoose";
-import config from "config";
 import log from "../logger";
 
-function connect() {
-  const dbUri = config.get("dbUri") as string;
+import * as config from "../config";
+const { databaseUri } = config.getEnvConfig();
 
-  return mongoose
-    .connect(dbUri, {
+function connect() {
+  return mongoose.connect(databaseUri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })

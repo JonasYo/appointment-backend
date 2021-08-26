@@ -1,6 +1,9 @@
 import { LeanDocument, FilterQuery, UpdateQuery } from "mongoose";
-import config from "config";
 import { get } from "lodash";
+
+import * as config from "../config";
+const { accessTokenTtl } = config.getEnvConfig();
+
 import { UserDocument } from "../model/user";
 import Session, { SessionDocument } from "../model/authentication";
 import { sign, decode } from "../utils/jwt.utils";
@@ -26,7 +29,7 @@ export function createAccessToken({
   // Build and return the new access token
   const accessToken = sign(
     { ...user, session: session._id },
-    { expiresIn: config.get("accessTokenTtl") } // 15 minutes
+      { expiresIn: accessTokenTtl } // 15 minutes
   );
 
   return accessToken;

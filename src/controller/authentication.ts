@@ -1,6 +1,9 @@
-import config from "config";
 import { get } from "lodash";
 import { Request, Response } from "express";
+
+import * as config from "../config";
+const { refreshTokenTtl } = config.getEnvConfig();
+
 import { validatePassword } from "../service/user";
 import {
   createSession,
@@ -29,7 +32,7 @@ export async function createUserSessionHandler(req: Request, res: Response) {
 
   // create refresh token
   const refreshToken = sign(session, {
-    expiresIn: config.get("refreshTokenTtl"), // 1 year
+      expiresIn: refreshTokenTtl, // 1 year
   });
 
   // send refresh & access token back
