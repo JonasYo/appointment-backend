@@ -3,7 +3,8 @@ import { Express, Request, Response } from "express";
 import { validateRequest, requiresUser } from "./middleware";
 
 import { createUserHandler } from "./controller/user";
-import { getAllServices } from "./controller/services";
+import servicesController from "./controller/services";
+import appointmentsController from "./controller/appointments";
 
 import {
   createUserSessionHandler,
@@ -23,10 +24,21 @@ export default function (app: Express) {
   app.post("/api/signup", validateRequest(createUserSchema), createUserHandler);
 
   app.post("/api/login", validateRequest(createUserSessionSchema), createUserSessionHandler);
+  
+//   app.post("/api/me", requiresUser);
+
+  app.get("/api/services", requiresUser, servicesController.listAll);
+
+  app.get("/api/appointments/:serviceId/:date", requiresUser, appointmentsController.listAvailableTimes);
+
+  app.post("/api/appointments", requiresUser, appointmentsController.create);
+  
+  app.put("/api/appointments", requiresUser, servicesController.listAll);
+  
+  app.delete("/api/appointments", requiresUser, servicesController.listAll);
+
 
   app.get("/api/sessions", requiresUser, getUserSessionsHandler);
 
   app.delete("/api/sessions", requiresUser, invalidateUserSessionHandler);
-
-  app.get("/api/services", getAllServices);
 }

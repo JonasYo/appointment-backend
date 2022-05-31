@@ -1,7 +1,10 @@
+require('dotenv').config();
 var seeder = require('mongoose-seed');
+import config from "../config";
 
-import * as config from "../config";
 const { databaseUri } = config.getEnvConfig();
+
+// const databaseUri = 'mongodb+srv://jonas:metalica@rest-api.lhoap.mongodb.net/scheduling?retryWrites=true&w=majority';
 
 seeder.connect(databaseUri, function () {
     seeder.loadModels([

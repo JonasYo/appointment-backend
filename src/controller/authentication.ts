@@ -1,7 +1,7 @@
 import { get } from "lodash";
 import { Request, Response } from "express";
 
-import * as config from "../config";
+import config from "../config";
 const { refreshTokenTtl } = config.getEnvConfig();
 
 import { validatePassword } from "../service/user";

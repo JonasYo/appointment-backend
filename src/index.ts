@@ -1,16 +1,19 @@
 import express from "express";
 import cors from "cors";
+import morgan from "morgan";
 
-import * as config from "./config";
+import config from "./config";
 import log from "./logger";
-import connect from "./db/connect";
+import connect from "./database/connect";
 import routes from "./routes";
 import { deserializeUser } from "./middleware";
 
 const { port, host } = config.getEnvConfig();
 
 const app = express();
+app.use(morgan('dev'));
 app.use(deserializeUser);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

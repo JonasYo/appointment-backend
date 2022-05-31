@@ -1,13 +1,15 @@
 import mongoose from "mongoose";
 import { nanoid } from "nanoid";
 import { UserDocument } from "./user";
+import { ServicesDocument } from "./services";
 
 export interface AppointmentsDocument extends mongoose.Document {
-  user_id: UserDocument["_id"];
+  userId: UserDocument["_id"];
+  serviceId: ServicesDocument["_id"];
   date: Date;
-  hour_id: string;
-  has_done: Boolean;
-  is_active: Boolean;
+  scheduleId: string;
+  hasDone: Boolean;
+  isActive: Boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -20,11 +22,12 @@ const AppointmentsSchema = new mongoose.Schema(
       unique: true,
       default: () => nanoid(10),
     },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    serviceId: { type: mongoose.Schema.Types.ObjectId, ref: "Service" },
     date: { type: Date, default: true },
-    hour_id: { type: String, default: true },
-    has_done: { type: Boolean, default: true },
-    is_active: { type: Boolean, default: true },
+    scheduleId: { type: String, default: true },
+    hasDone: { type: Boolean, default: true },
+    isActive: { type: Boolean, default: true },
   },
   { timestamps: true }
 );

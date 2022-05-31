@@ -1,67 +1,83 @@
 import { Request, Response } from "express";
-import { get } from "lodash";
+import { get, isNull } from "lodash";
 import {
-  createPost,
-  findPost,
+    createAppointment,
+    findAppointment,
   findAndUpdate,
-  deletePost,
+    deleteAppointment,
 } from "../service/appointments";
+import schedulesController from "../service/schedules";
 
-export async function createPostHandler(req: Request, res: Response) {
+const create = async(req: Request, res: Response) => {
   const userId = get(req, "user._id");
-  const body = req.body;
 
-  const post = await createPost({ ...body, user: userId });
+  const { body } = req;
+  const date = new Date(body.date);
 
-  return res.send(post);
+  const appointment = await createAppointment({ ...body, date, user: userId });
+
+  return res.send({ appointment });
 }
 
-export async function updatePostHandler(req: Request, res: Response) {
+const update = async (req: Request, res: Response) => {
   const userId = get(req, "user._id");
   const postId = get(req, "params.postId");
   const update = req.body;
 
-  const post = await findPost({ postId });
+    const post = await findAppointment({ postId });
 
   if (!post) {
     return res.sendStatus(404);
   }
 
-  if (String(post.user_id) !== userId) {
-    return res.sendStatus(401);
-  }
+//   if (String(post.userId) !== userId) {
+//     return res.sendStatus(401);
+//   }
 
   const updatedPost = await findAndUpdate({ postId }, update, { new: true });
 
   return res.send(updatedPost);
 }
 
-export async function getPostHandler(req: Request, res: Response) {
-  const postId = get(req, "params.postId");
-  const post = await findPost({ postId });
+const listAvailableTimes = async (req: Request, res: Response) => {
+  const { serviceId, date } = req.params;
+  
+  const dateFormatted = new Date(date);
+  const appointments = await findAppointment({ serviceId, date: dateFormatted });
 
-  if (!post) {
-    return res.sendStatus(404);
-  }
+    if (!appointments.length) {
+        const availableTimes = await schedulesController.findAllBy({});
 
-  return res.send(post);
+        return res.send({ availableTimes });
+    }
+
+    const reservedTimes = appointments.map(item => item.scheduleId);
+    const availableTimes = await schedulesController.findAllBy({ _id: { $nin: reservedTimes }});
+
+    return res.send({ availableTimes });
 }
 
-export async function deletePostHandler(req: Request, res: Response) {
-  const userId = get(req, "user._id");
-  const postId = get(req, "params.postId");
+const deleteById = async(req: Request, res: Response) =>{
+    const { userId, appointmentId } = req.params;
 
-  const post = await findPost({ postId });
+    const post = await findAppointment({ appointmentId });
 
   if (!post) {
     return res.sendStatus(404);
   }
 
-    if (String(post.user_id) !== String(userId)) {
-    return res.sendStatus(401);
-  }
+//     if (String(post.userId) !== String(userId)) {
+//     return res.sendStatus(401);
+//   }
 
-  await deletePost({ postId });
+    await deleteAppointment({ appointmentId });
 
   return res.sendStatus(200);
+}
+
+export default {
+    create,
+    update,
+    listAvailableTimes,
+    deleteById
 }

@@ -6,15 +6,15 @@ import {
 } from "mongoose";
 import Appointments, { AppointmentsDocument } from "../model/appointments";
 
-export function createPost(input: DocumentDefinition<AppointmentsDocument>) {
+export function createAppointment(input: DocumentDefinition<AppointmentsDocument>) {
     return Appointments.create(input);
 }
 
-export function findPost(
+export function findAppointment(
   query: FilterQuery<AppointmentsDocument>,
   options: QueryOptions = { lean: true }
 ) {
-    return Appointments.findOne(query, {}, options);
+    return Appointments.find(query, {}, options);
 }
 
 export function findAndUpdate(
@@ -25,6 +25,6 @@ export function findAndUpdate(
     return Appointments.findOneAndUpdate(query, update, options);
 }
 
-export function deletePost(query: FilterQuery<AppointmentsDocument>) {
+export function deleteAppointment(query: FilterQuery<AppointmentsDocument>) {
     return Appointments.deleteOne(query);
 }

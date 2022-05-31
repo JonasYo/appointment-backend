@@ -5,10 +5,10 @@
   "license": "MIT",
   "scripts": {
     "start": "yarn build && node ./dist/src/index.js",
-    "start:dev": "nodemon --config nodemon.json src/index.ts",
+    "dev": "nodemon --config nodemon.json src/index.ts",
     "build": "rimraf ./dist && tsc",
     "serve": "node dist/index.ts",
-    "seed": "node src/seeds/index.ts"
+    "seed": "ts-node src/seeds/index.ts"
   },
   "dependencies": {
     "@types/bcrypt": "^3.0.1",
@@ -19,6 +19,7 @@
     "@types/jsonwebtoken": "^8.5.1",
     "@types/lodash": "^4.14.168",
     "@types/mongoose": "^5.10.5",
+    "@types/morgan": "^1.9.3",
     "@types/nanoid": "^2.1.0",
     "@types/node": "^15.0.1",
     "@types/pino": "^6.3.8",
@@ -33,14 +34,16 @@
     "lodash": "^4.17.21",
     "mongoose": "^5.12.7",
     "mongoose-seed": "^0.6.0",
+    "morgan": "^1.10.0",
     "nanoid": "^3.1.22",
-    "nodemon": "^2.0.9",
     "pino": "^6.11.3",
     "pino-pretty": "^4.7.1",
     "rimraf": "^3.0.2",
     "ts-node": "^9.1.1",
-    "typescript": "^4.2.4",
     "yup": "^0.32.9"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "^2.0.9",
+    "typescript": "^4.2.4"
+  }
 }

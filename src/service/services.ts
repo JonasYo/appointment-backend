@@ -24,4 +24,4 @@ const findAll = async () => {
     }
 }
 
-export { findAll}
+export { findAll }

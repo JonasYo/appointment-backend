@@ -1,7 +1,7 @@
 import { LeanDocument, FilterQuery, UpdateQuery } from "mongoose";
 import { get } from "lodash";
 
-import * as config from "../config";
+import config from "../config";
 const { accessTokenTtl } = config.getEnvConfig();
 
 import { UserDocument } from "../model/user";

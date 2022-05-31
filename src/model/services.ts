@@ -7,7 +7,7 @@ export interface ServicesDocument extends mongoose.Document {
   category: String;
   duration: String;
   price: String;
-  is_active: String;
+  isActive: String;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -25,7 +25,7 @@ const ServicesSchema = new mongoose.Schema(
     category: { type: String, default: true },
     duration: { type: String, default: true },
     price: { type: String, default: true },
-    is_active: { type: String, default: true },
+    isActive: { type: String, default: true },
   },
   { timestamps: true }
 );

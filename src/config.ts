@@ -29,6 +29,8 @@ const envConfig: envConfigOptions = {
     },
 };
 
-export const getEnv = () => actualEnv;
+const getEnv = () => actualEnv;
 
-export const getEnvConfig = () => envConfig[actualEnv];
+const getEnvConfig = () => envConfig[actualEnv];
+
+export default { getEnv, getEnvConfig}

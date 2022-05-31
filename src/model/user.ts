@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
-import * as config from "../config";
+import config from "../config";
 const { saltWorkFactor } = config.getEnvConfig();
 
 export interface UserDocument extends mongoose.Document {
