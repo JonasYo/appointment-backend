@@ -1,15 +1,25 @@
 {
+  "name": "vercel-typescript-ddd-api",
   "version": 2,
+  "public": true,
   "builds": [
     {
-      "src": "index.js",
-      "use": "@now/node"
+      "src": "src/index.ts",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
+      "src": "/robots.txt",
+      "status": 204
+    },
+    {
+      "src": "/favicon.ico",
+      "status": 204
+    },
+    {
       "src": "/(.*)",
-      "dest": "index.js"
+      "dest": "/src/index.ts"
     }
   ]
 }
