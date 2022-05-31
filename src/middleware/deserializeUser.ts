@@ -11,8 +11,6 @@ const deserializeUser = async (
   const accessToken = req.headers.accesstoken as string;
   const refreshToken  = req.headers.refreshtoken as string;
 
-    console.log(accessToken);
-
   if (!accessToken) return next();
 
   const { decoded, expired } = decode(accessToken);

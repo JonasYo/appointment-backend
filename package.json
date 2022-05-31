@@ -6,7 +6,7 @@
   "scripts": {
     "start": "yarn build && node ./dist/src/index.js",
     "dev": "nodemon --config nodemon.json src/index.ts",
-    "build": "rimraf ./dist && tsc",
+    "build": "rimraf ./dist && tsc --output public",
     "serve": "node dist/index.ts",
     "seed": "ts-node src/seeds/index.ts"
   },

@@ -6,25 +6,20 @@ import {
 } from "mongoose";
 import Appointments, { AppointmentsDocument } from "../model/appointments";
 
-export function createAppointment(input: DocumentDefinition<AppointmentsDocument>) {
+const create = async (input: DocumentDefinition<AppointmentsDocument>) => {
     return Appointments.create(input);
 }
 
-export function findAppointment(
-  query: FilterQuery<AppointmentsDocument>,
-  options: QueryOptions = { lean: true }
-) {
+const findAllBy = async (query: FilterQuery<AppointmentsDocument>,  options: QueryOptions = { lean: true }) =>{
     return Appointments.find(query, {}, options);
 }
 
-export function findAndUpdate(
-  query: FilterQuery<AppointmentsDocument>,
-  update: UpdateQuery<AppointmentsDocument>,
-  options: QueryOptions
-) {
+const findAndUpdate = async (query: FilterQuery<AppointmentsDocument>,  update: UpdateQuery<AppointmentsDocument>,  options: QueryOptions) => {
     return Appointments.findOneAndUpdate(query, update, options);
 }
 
-export function deleteAppointment(query: FilterQuery<AppointmentsDocument>) {
+const deleteById = async (query: FilterQuery<AppointmentsDocument>) =>{
     return Appointments.deleteOne(query);
 }
+
+export default { create, findAllBy, findAndUpdate, deleteById};
