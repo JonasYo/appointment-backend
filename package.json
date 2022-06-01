@@ -7,7 +7,7 @@
     "node": "16.x"
   },
   "scripts": {
-    "start": "yarn build && node ./dist/src/index.js",
+    "start": "yarn build && node ./dist/index.js",
     "dev": "nodemon --config nodemon.json src/index.ts",
     "build": "rimraf ./dist && tsc",
     "serve": "node dist/index.ts",

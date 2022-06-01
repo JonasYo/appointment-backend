@@ -19,7 +19,7 @@ import {
 } from "./schema/user";
 
 export default function (app: Express) {
-  app.get('/', (req: Request, res: Response) => res.status(204).send("Express on Vercel"));
+  app.get('/', (req: Request, res: Response) => res.status(200).send("Build succeeded"));
   
   app.get('/ping', (req: Request, res: Response) => res.status(204).send({}));
 
