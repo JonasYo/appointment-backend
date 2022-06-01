@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "license": "MIT",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "start": "yarn build && node ./dist/src/index.js",
     "dev": "nodemon --config nodemon.json src/index.ts",
-    "build": "rimraf ./dist && tsc --output public",
+    "build": "rimraf ./dist && tsc",
     "serve": "node dist/index.ts",
     "seed": "ts-node src/seeds/index.ts"
   },
