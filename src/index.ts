@@ -10,7 +10,7 @@ import { deserializeUser } from "./middleware";
 
 const { port, host } = config.getEnvConfig();
 
-const PORT = port || 3001;
+const PORT = port || 5000;
 
 const app = express();
 app.use(morgan('dev'));

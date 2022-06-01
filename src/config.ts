@@ -10,7 +10,7 @@ interface envConfigOptions {
 
 const envConfig: envConfigOptions = {
     local: {
-        port: process.env.port,
+        port: process.env.PORT,
         host: process.env.host,
         databaseUri: process.env.databaseUri,
         privateKey: process.env.privateKey,
@@ -19,7 +19,7 @@ const envConfig: envConfigOptions = {
         refreshTokenTtl: process.env.refreshTokenTtl,
     },
     prod: {
-        port: process.env.port,
+        port: process.env.PORT,
         host: process.env.host,
         databaseUri: process.env.databaseUri,
         privateKey: process.env.privateKey,
