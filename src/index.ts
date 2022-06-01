@@ -10,6 +10,8 @@ import { deserializeUser } from "./middleware";
 
 const { port, host } = config.getEnvConfig();
 
+const PORT = port || 3001;
+
 const app = express();
 app.use(morgan('dev'));
 app.use(deserializeUser);
@@ -26,8 +28,8 @@ app.use((req, res, next) => {
     next();
 });
 
-app.listen(port, host, () => {
-  log.info(`Server listing at http://${host}:${port}`);
+app.listen(PORT, host, () => {
+  log.info(`Server listing at http://${host}:${PORT}`);
 
   connect();
 
