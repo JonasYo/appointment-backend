@@ -20,6 +20,7 @@ import {
 
 export default function (app: Express) {
   app.get('/', (req: Request, res: Response) => res.status(204).send("Express on Vercel"));
+  
   app.get('/ping', (req: Request, res: Response) => res.status(204).send({}));
 
   app.post("/api/signup", validateRequest(createUserSchema), createUserHandler);
